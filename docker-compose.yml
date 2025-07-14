@@ -1,0 +1,20 @@
+
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    container_name: cpu-backend
+
+  frontend:
+    build:
+      context: ./cpu-scheduler-frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    container_name: cpu-frontend
+    environment:
+      - NEXT_PUBLIC_BACKEND_URL=http://localhost:8080

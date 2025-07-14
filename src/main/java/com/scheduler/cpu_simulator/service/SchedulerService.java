@@ -39,9 +39,7 @@ public class SchedulerService {
         while (!queue.isEmpty()) {
             List<Process> ready = new ArrayList<>();
             for (Process p : queue) {
-                if (p.getArrivalTime() <= time) {
-                    ready.add(p);
-                }
+                if (p.getArrivalTime() <= time) ready.add(p);
             }
 
             if (ready.isEmpty()) {
@@ -71,9 +69,7 @@ public class SchedulerService {
         while (!queue.isEmpty()) {
             List<Process> ready = new ArrayList<>();
             for (Process p : queue) {
-                if (p.getArrivalTime() <= time) {
-                    ready.add(p);
-                }
+                if (p.getArrivalTime() <= time) ready.add(p);
             }
 
             if (ready.isEmpty()) {
@@ -100,6 +96,7 @@ public class SchedulerService {
         int time = 0;
         Queue<Process> readyQueue = new LinkedList<>();
         Map<String, Integer> remainingTime = new HashMap<>();
+
         for (Process p : processes) {
             remainingTime.put(p.getPid(), p.getBurstTime());
         }
@@ -115,7 +112,9 @@ public class SchedulerService {
             }
 
             if (readyQueue.isEmpty()) {
-                time = queue.get(index).getArrivalTime();
+                if (index < queue.size()) {
+                    time = queue.get(index).getArrivalTime();
+                }
                 continue;
             }
 

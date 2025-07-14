@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.scheduler.cpu_simulator.model.Process;
@@ -37,7 +36,7 @@ public class SchedulerController {
     }
 
     @PostMapping("/rr")
-    public List<Process> runRR(@RequestParam int quantum, @RequestBody List<Process> processes) {
-        return schedulerService.simulateRoundRobin(processes, quantum);
+    public List<Process> runRR(@RequestBody SimulationRequest request) {
+        return schedulerService.simulateRoundRobin(request.getProcesses(), request.getQuantum());
     }
 }
