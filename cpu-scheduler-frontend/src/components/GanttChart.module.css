@@ -1,0 +1,57 @@
+.ganttBlock {
+  border: 1px solid rgb(209, 213, 219);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 500;
+  position: relative;
+  height: 60px;
+  min-width: 80px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+:global(.dark) .ganttBlock {
+  border: 1px solid rgb(75, 85, 99);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.ganttBlock:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+:global(.dark) .ganttBlock:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.timeLabel {
+  font-size: 0.75rem;
+  color: rgb(75, 85, 99);
+  border-right: 1px solid rgb(229, 231, 235);
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0.25rem;
+  min-width: 80px;
+  font-weight: 500;
+}
+
+:global(.dark) .timeLabel {
+  color: rgb(156, 163, 175);
+  border-right: 1px solid rgb(75, 85, 99);
+}
+
+@media (max-width: 768px) {
+  .ganttBlock {
+    height: 50px;
+    min-width: 60px;
+    font-size: 0.875rem;
+  }
+  
+  .timeLabel {
+    min-width: 60px;
+    font-size: 0.6875rem;
+    padding: 0.25rem;
+  }
+}
