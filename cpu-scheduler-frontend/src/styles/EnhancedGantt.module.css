@@ -1,0 +1,530 @@
+/* Enhanced Gantt Chart Styles with Animation Support */
+
+.ganttContainer {
+  padding: 1.5rem;
+  background-color: rgb(17, 24, 39);
+  border-radius: 0.5rem;
+  border: 1px solid rgb(75, 85, 99);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.ganttHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.animateButton {
+  padding: 0.5rem 1rem;
+  background-color: rgb(37, 99, 235);
+  color: white;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  border: none;
+  cursor: pointer;
+}
+
+.animateButton:hover {
+  background-color: rgb(29, 78, 216);
+  box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.25);
+}
+
+.animateButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.chartWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.timeline {
+  position: relative;
+  background-color: rgb(31, 41, 55);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  overflow-x: auto;
+  min-height: 200px;
+}
+
+.timeMarkers {
+  position: relative;
+  height: 2rem;
+  border-bottom: 1px solid rgb(75, 85, 99);
+  margin-bottom: 1rem;
+}
+
+.timeMarker {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-left: 1px solid #4B5563;
+}
+
+.timeLabel {
+  font-size: 0.75rem;
+  color: rgb(156, 163, 175);
+  font-family: monospace;
+  margin-top: 0.25rem;
+  background-color: rgb(31, 41, 55);
+  padding: 0 0.25rem;
+  border-radius: 0.125rem;
+}
+
+.ganttTrack {
+  position: relative;
+  height: 4rem;
+  background-color: rgb(55, 65, 81);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background-image: linear-gradient(90deg, transparent 24px, rgba(75, 85, 99, 0.5) 25px);
+  background-size: 40px 100%;
+}
+
+.ganttBlock {
+  position: absolute;
+  height: 50px;
+  min-width: 60px;
+  margin-top: 0.5rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  font-size: 0.875rem;
+  border: 2px solid rgb(107, 114, 128);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  animation: slideInFromLeft 0.7s ease-out forwards;
+  left: calc(var(--start-time, 0) / var(--max-time, 1) * 100%);
+  width: max(calc(var(--duration, 1) / var(--max-time, 1) * 100%), 8%);
+  animation-delay: calc(var(--animation-delay, 0) * 1ms);
+}
+
+.ganttBlock:hover {
+  transform: scale(1.05);
+  z-index: 10;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.ganttBlock.visible {
+  animation: slideIn 0.5s ease-out forwards;
+}
+
+.blockLabel {
+  position: relative;
+  z-index: 10;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.5));
+}
+
+.blockGlow {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0.2;
+  filter: blur(4px);
+}
+
+.currentTimeIndicator {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 20;
+}
+
+.timePointer {
+  width: 2px;
+  height: 100%;
+  background-color: rgb(239, 68, 68);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.timePointer::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: -6px;
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-bottom: 8px solid #EF4444;
+}
+
+.currentTimeLabel {
+  font-size: 0.75rem;
+  color: rgb(248, 113, 113);
+  font-family: monospace;
+  background-color: rgb(17, 24, 39);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 0.25rem;
+}
+
+.legend {
+  background-color: rgb(31, 41, 55);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  border: 1px solid rgb(75, 85, 99);
+}
+
+.legendTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 0.75rem;
+}
+
+.legendItems {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .legendItems {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .legendItems {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem;
+  background-color: rgb(55, 65, 81);
+  border-radius: 0.5rem;
+  transition: background-color 0.2s;
+}
+
+.legendItem:hover {
+  background-color: rgb(75, 85, 99);
+}
+
+.legendColor {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+}
+
+.legendText {
+  font-size: 0.875rem;
+  color: rgb(209, 213, 219);
+  font-weight: 500;
+}
+
+.executionDetails {
+  background-color: rgb(31, 41, 55);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  border: 1px solid rgb(75, 85, 99);
+}
+
+.detailsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .detailsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .detailsGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.processDetail {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background-color: rgb(55, 65, 81);
+  border-radius: 0.5rem;
+  transition: all 0.2s;
+  cursor: pointer;
+  border: 1px solid rgb(75, 85, 99);
+}
+
+.processDetail:hover {
+  background-color: rgb(75, 85, 99);
+  border-color: rgb(107, 114, 128);
+}
+
+.processIcon {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 0.875rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.processInfo {
+  flex: 1;
+}
+
+.processName {
+  color: white;
+  font-weight: 600;
+}
+
+.processStats {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.75rem;
+  color: rgb(156, 163, 175);
+}
+
+/* Process color variations */
+.process0 {
+  background: linear-gradient(135deg, rgb(239, 68, 68), rgb(220, 38, 38));
+  color: white;
+}
+
+.process1 {
+  background: linear-gradient(135deg, rgb(59, 130, 246), rgb(37, 99, 235));
+  color: white;
+}
+
+.process2 {
+  background: linear-gradient(135deg, rgb(34, 197, 94), rgb(22, 163, 74));
+  color: white;
+}
+
+.process3 {
+  background: linear-gradient(135deg, rgb(234, 179, 8), rgb(202, 138, 4));
+  color: black;
+}
+
+.process4 {
+  background: linear-gradient(135deg, rgb(168, 85, 247), rgb(147, 51, 234));
+  color: white;
+}
+
+.process5 {
+  background: linear-gradient(135deg, rgb(236, 72, 153), rgb(219, 39, 119));
+  color: white;
+}
+
+.process6 {
+  background: linear-gradient(135deg, rgb(99, 102, 241), rgb(79, 70, 229));
+  color: white;
+}
+
+.process7 {
+  background: linear-gradient(135deg, rgb(20, 184, 166), rgb(13, 148, 136));
+  color: white;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.ganttBlock:hover .blockGlow {
+  animation: pulse 1s infinite;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .ganttContainer {
+    padding: 1rem;
+  }
+  
+  .ganttHeader {
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+  
+  .timeline {
+    font-size: 0.75rem;
+  }
+  
+  .detailsGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .legendItems {
+    grid-template-columns: 1fr;
+  }
+  
+  .ganttBlock {
+    height: 40px;
+    font-size: 0.75rem;
+    min-width: 50px;
+  }
+}
+
+/* Animation utilities */
+.animateIn {
+  animation-delay: var(--animation-delay);
+}
+
+/* Legacy support styles */
+.timeScale {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgb(75, 85, 99);
+}
+
+.timeTick {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 0.75rem;
+  color: rgb(156, 163, 175);
+}
+
+.timeTickLine {
+  width: 1px;
+  height: 8px;
+  background-color: rgb(107, 114, 128);
+  margin-bottom: 4px;
+}
+
+.processLegend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background-color: rgb(55, 65, 81);
+  border-radius: 8px;
+}
+
+.legendColor0 { background: linear-gradient(135deg, rgb(239, 68, 68), rgb(220, 38, 38)); }
+.legendColor1 { background: linear-gradient(135deg, rgb(59, 130, 246), rgb(37, 99, 235)); }
+.legendColor2 { background: linear-gradient(135deg, rgb(34, 197, 94), rgb(22, 163, 74)); }
+.legendColor3 { background: linear-gradient(135deg, rgb(234, 179, 8), rgb(202, 138, 4)); }
+.legendColor4 { background: linear-gradient(135deg, rgb(168, 85, 247), rgb(147, 51, 234)); }
+.legendColor5 { background: linear-gradient(135deg, rgb(236, 72, 153), rgb(219, 39, 119)); }
+.legendColor6 { background: linear-gradient(135deg, rgb(99, 102, 241), rgb(79, 70, 229)); }
+.legendColor7 { background: linear-gradient(135deg, rgb(20, 184, 166), rgb(13, 148, 136)); }
+
+/* Enhanced visual effects */
+.ganttBlock::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.ganttBlock:hover::after {
+  opacity: 1;
+}
+
+/* Dark mode enhancements */
+:global(.dark) .ganttBlock {
+  border-color: rgb(107, 114, 128);
+}
+
+:global(.dark) .timeScale {
+  border-top-color: rgb(107, 114, 128);
+}
+
+:global(.dark) .timeTick {
+  color: rgb(156, 163, 175);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .ganttBlock {
+    height: 40px;
+    font-size: 0.75rem;
+    min-width: 50px;
+  }
+  
+  .processLegend {
+    gap: 0.5rem;
+  }
+  
+  .legendItem {
+    padding: 0.375rem;
+  }
+}
