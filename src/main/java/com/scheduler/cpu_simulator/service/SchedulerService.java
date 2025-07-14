@@ -107,6 +107,7 @@ public class SchedulerService {
         Map<String, Integer> remainingTime = new HashMap<>();
         List<Process> result = new ArrayList<>();
         Set<String> completed = new HashSet<>();
+        Set<String> addedToQueue = new HashSet<>();
 
         // Initialize remaining time for all processes
         for (Process p : processes) {
@@ -120,7 +121,11 @@ public class SchedulerService {
             // Add all processes that have arrived by current time to ready queue
             while (processIndex < sortedProcesses.size() &&
                     sortedProcesses.get(processIndex).getArrivalTime() <= time) {
-                readyQueue.add(sortedProcesses.get(processIndex));
+                Process p = sortedProcesses.get(processIndex);
+                if (!addedToQueue.contains(p.getPid())) {
+                    readyQueue.add(p);
+                    addedToQueue.add(p.getPid());
+                }
                 processIndex++;
             }
 
@@ -153,7 +158,11 @@ public class SchedulerService {
             // Add any newly arrived processes to ready queue
             while (processIndex < sortedProcesses.size() &&
                     sortedProcesses.get(processIndex).getArrivalTime() <= time) {
-                readyQueue.add(sortedProcesses.get(processIndex));
+                Process p = sortedProcesses.get(processIndex);
+                if (!addedToQueue.contains(p.getPid())) {
+                    readyQueue.add(p);
+                    addedToQueue.add(p.getPid());
+                }
                 processIndex++;
             }
 
