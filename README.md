@@ -1,237 +1,413 @@
-CPU Scheduling Simulator 🚀
+# CPU Scheduling Simulator
 
-A comprehensive full-stack application for simulating and visualizing CPU scheduling algorithms.
-Built with a Spring Boot backend and a Next.js frontend, this project provides an interactive platform to understand different scheduling mechanisms with real-time visualization.
+A comprehensive full-stack application for simulating and visualizing CPU scheduling algorithms. Built with Spring Boot backend and Next.js frontend, this project provides an interactive platform to understand different CPU scheduling mechanisms with real-time visualization.
 
-✨ Features
-Supported Scheduling Algorithms
+## 🚀 Features
 
-First Come First Served (FCFS) – Non-preemptive, based on arrival time
+### Supported Scheduling Algorithms
 
-Shortest Job First (SJF) – Non-preemptive, based on burst time
+- **First Come First Served (FCFS)** - Non-preemptive scheduling based on arrival time
+- **Shortest Job First (SJF)** - Non-preemptive scheduling based on burst time
+- **Priority Scheduling** - Non-preemptive scheduling based on process priority
+- **Round Robin (RR)** - Preemptive scheduling with configurable time quantum
 
-Priority Scheduling – Non-preemptive, based on process priority
+### Interactive Features
 
-Round Robin (RR) – Preemptive scheduling with configurable time quantum
+- **Process Management**: Add, remove, and manage processes with custom parameters
+- **Real-time Visualization**: Interactive Gantt chart showing process execution timeline
+- **Performance Metrics**: Calculate and display waiting time, turnaround time, and completion time
+- **Demo Data**: Pre-loaded datasets for quick testing of algorithms
+- **Responsive Design**: Modern UI that works on all devices
+- **Dark/Light Theme**: Toggle between themes for better user experience
 
-Interactive Features
+### Visual Components
 
-Process Management – Add, remove, and configure processes with custom parameters
+- **Enhanced Gantt Chart**: Animated timeline visualization with process execution blocks
+- **Process Results Table**: Detailed breakdown of process execution metrics
+- **Statistics Dashboard**: Average performance metrics and execution summary
+- **Algorithm Comparison**: Side-by-side comparison of different scheduling approaches
 
-Real-time Visualization – Interactive Gantt chart for execution timeline
+## 🏗️ Architecture
 
-Performance Metrics – Waiting time, turnaround time, and completion time
+### Backend (Spring Boot)
 
-Demo Data – Pre-loaded datasets for quick testing
-
-Responsive Design – Works seamlessly across devices
-
-Dark/Light Theme – Toggleable UI themes
-
-Visual Components
-
-Enhanced Gantt Chart – Animated visualization of process execution
-
-Results Table – Detailed process execution breakdown
-
-Statistics Dashboard – Average performance metrics and summary
-
-Algorithm Comparison – Side-by-side performance evaluation
-
-🏗️ Architecture
-Backend (Spring Boot)
+```
 src/main/java/com/scheduler/cpu_simulator/
-├── CpuSimulatorApplication.java     # Main entry point
+├── CpuSimulatorApplication.java     # Main application entry point
 ├── controller/
 │   ├── SchedulerController.java     # REST API endpoints
 │   └── SimulationRequest.java       # Request DTOs
 ├── model/
-│   └── Process.java                 # Process entity
+│   └── Process.java                 # Process entity model
 └── service/
     └── SchedulerService.java        # Core scheduling algorithms
+```
 
-Frontend (Next.js)
+### Frontend (Next.js)
+
+```
 cpu-scheduler-frontend/src/
 ├── app/
 │   ├── page.tsx                     # Main application page
-│   ├── layout.tsx                   # Root layout
+│   ├── layout.tsx                   # Root layout component
 │   └── globals.css                  # Global styles
 ├── components/
+│   ├── ui/                          # Reusable UI components
+│   ├── DemoDataLoader.tsx           # Demo data management
 │   ├── EnhancedGanttChart.tsx       # Advanced Gantt visualization
 │   ├── GanttChart.tsx               # Basic Gantt chart
-│   ├── ProcessInputForm.tsx         # Input interface
-│   ├── ProcessTable.tsx             # Process management
+│   ├── ProcessInputForm.tsx         # Process input interface
+│   ├── ProcessTable.tsx             # Process management table
 │   ├── ResultsTable.tsx             # Results display
-│   ├── StatisticsDashboard.tsx      # Metrics summary
-│   ├── ThemeToggle.tsx              # Theme switcher
-│   └── DemoDataLoader.tsx           # Preloaded demo data
-├── contexts/ThemeContext.tsx        # Theme management
-├── lib/api.ts                       # API client
-├── lib/utils.ts                     # Utility functions
-└── types/process.ts                 # Type definitions
+│   ├── SimpleProcessInput.tsx       # Simplified input form
+│   └── ThemeToggle.tsx              # Theme switcher
+├── contexts/
+│   └── ThemeContext.tsx             # Theme management
+├── lib/
+│   ├── api.ts                       # API client for backend communication
+│   └── utils.ts                     # Utility functions
+├── styles/
+│   └── EnhancedGantt.module.css     # Gantt chart specific styles
+└── types/
+    └── process.ts                   # TypeScript type definitions
+```
 
-🛠️ Technology Stack
-Backend
+## 🛠️ Technology Stack
 
-Java 21
+### Backend
 
-Spring Boot 3.5.3 (REST APIs, DevTools)
+- **Java 21** - Modern Java features and performance
+- **Spring Boot 3.5.3** - Enterprise-grade framework
+- **Spring Web** - REST API development
+- **Spring DevTools** - Development productivity
+- **Maven** - Dependency management and build tool
+- **Lombok** - Boilerplate code reduction
 
-Maven (dependency management)
+### Frontend
 
-Lombok (boilerplate reduction)
+- **Next.js 15** - React framework with server-side rendering
+- **TypeScript** - Type-safe JavaScript
+- **Tailwind CSS 4** - Utility-first CSS framework
+- **Lucide React** - Modern icon library
+- **Radix UI** - Accessible component primitives
+- **Framer Motion** - Animation library
 
-Frontend
+### Development Tools
 
-Next.js 15 (React + SSR)
+- **ESLint** - Code linting
+- **PostCSS** - CSS processing
+- **Maven Wrapper** - Maven version management
 
-TypeScript (type safety)
+## 📋 Prerequisites
 
-Tailwind CSS 4 (modern UI)
+- **Java 21** or higher
+- **Node.js 18+** and npm
+- **Maven 3.6+** (or use included Maven wrapper)
+- **Git** for version control
 
-Lucide React (icons), Radix UI (accessible components), Framer Motion (animations)
+## 🚀 Installation & Setup
 
-Development Tools
+### 1. Clone the Repository
 
-ESLint, PostCSS
-
-Maven Wrapper
-
-Git for version control
-
-📋 Prerequisites
-
-Java 21+
-
-Node.js 18+ & npm
-
-Maven 3.6+ (or Maven wrapper)
-
-Git
-
-🚀 Installation & Setup
-
-Clone the Repository
-
+```bash
 git clone https://github.com/Bhavesh0577/CpuSchedulingSimulator.git
 cd CpuSchedulingSimulator
+```
 
+### 2. Backend Setup (Spring Boot)
 
-Backend Setup (Spring Boot)
+```bash
+# Navigate to project root
+cd CpuSchedulingSimulator
 
-./mvnw spring-boot:run   # With Maven wrapper
-# or
+# Build and run using Maven wrapper (recommended)
+./mvnw spring-boot:run
+
+# Or if you have Maven installed globally
 mvn spring-boot:run
-# Runs on http://localhost:8080
 
+# Backend will start on http://localhost:8080
+```
 
-Frontend Setup (Next.js)
+### 3. Frontend Setup (Next.js)
 
+```bash
+# Navigate to frontend directory
 cd cpu-scheduler-frontend
+
+# Install dependencies
 npm install
+
+# Start development server
 npm run dev
-# Runs on http://localhost:3000
 
-🎯 Usage Guide
+# Frontend will start on http://localhost:3000
+```
 
-Start both backend and frontend.
+## 🎯 Usage Guide
 
-Open http://localhost:3000
-.
+### Getting Started
 
-Add processes manually or load demo data.
+1. **Launch the Application**: Start both backend and frontend servers
+2. **Access the Interface**: Open `http://localhost:3000` in your browser
+3. **Select Algorithm**: Choose from FCFS, SJF, Priority, or Round Robin
+4. **Configure Settings**: Set time quantum for Round Robin if selected
 
-Choose an algorithm (FCFS, SJF, Priority, RR).
+### Adding Processes
 
-Run simulation → View results, charts, and metrics.
+1. **Enter Process Details**:
 
-🔧 API Documentation
-Endpoints
+   - Process ID (e.g., P1, P2, P3)
+   - Arrival Time (when process arrives)
+   - Burst Time (execution time required)
+   - Priority (for Priority scheduling, lower number = higher priority)
 
-FCFS → POST /api/scheduler/fcfs
+2. **Use Demo Data**: Click demo buttons for pre-configured test cases
+3. **Manage Processes**: Add, remove, or clear processes as needed
 
-SJF → POST /api/scheduler/sjf
+### Running Simulations
 
-Priority → POST /api/scheduler/priority
+1. **Execute Simulation**: Click "Run Simulation" to process your data
+2. **View Results**: Analyze the comprehensive results including:
+   - Process execution timeline (Gantt chart)
+   - Individual process metrics
+   - Average waiting and turnaround times
+   - Total execution time
 
-Round Robin → POST /api/scheduler/rr?quantum=2
+### Understanding Results
 
-Example Request
+- **Completion Time**: When process finishes execution
+- **Turnaround Time**: Total time from arrival to completion
+- **Waiting Time**: Time spent waiting in ready queue
+- **Gantt Chart**: Visual timeline of process execution order
+
+## 🔧 API Documentation
+
+### REST Endpoints
+
+#### FCFS Scheduling
+
+```http
+POST /api/scheduler/fcfs
+Content-Type: application/json
+
 [
   {
     "pid": "P1",
     "arrivalTime": 0,
     "burstTime": 10,
-    "priority": 1
+    "priority": 0
   }
 ]
+```
 
-🧪 Algorithms Implemented
+#### SJF Scheduling
 
-FCFS – Simple, but may cause high waiting time
+```http
+POST /api/scheduler/sjf
+Content-Type: application/json
 
-SJF – Minimum average waiting time, but risk of starvation
+[Process Array]
+```
 
-Priority – Higher priority processes first, but starvation possible
+#### Priority Scheduling
 
-Round Robin – Fair CPU sharing, may increase context switching
+```http
+POST /api/scheduler/priority
+Content-Type: application/json
 
-📊 Performance Metrics
+[Process Array]
+```
 
-Completion Time
+#### Round Robin Scheduling
 
-Turnaround Time
+```http
+POST /api/scheduler/rr?quantum=2
+Content-Type: application/json
 
-Waiting Time
+[Process Array]
+```
 
-Average Waiting & Turnaround Times
+### Data Models
 
-Comparison Dashboard – Compare algorithms side by side
+#### Process Model
 
-📈 Future Enhancements
+```typescript
+interface Process {
+  pid: string; // Process identifier
+  arrivalTime: number; // Arrival time
+  burstTime: number; // Execution time
+  priority: number; // Process priority
+  completionTime?: number; // Calculated completion time
+  turnaroundTime?: number; // Calculated turnaround time
+  waitingTime?: number; // Calculated waiting time
+}
+```
 
-Additional algorithms (SRTF, Multilevel Queue, MLFQ)
+## 🧪 Algorithm Implementations
 
-Process aging & deadline scheduling
+### First Come First Served (FCFS)
 
-Export results (CSV/PDF)
+- **Type**: Non-preemptive
+- **Logic**: Execute processes in order of arrival
+- **Advantage**: Simple implementation, no starvation
+- **Disadvantage**: High average waiting time
 
-Mobile version (React Native)
+### Shortest Job First (SJF)
 
-Advanced analytics dashboard
+- **Type**: Non-preemptive
+- **Logic**: Execute shortest process first
+- **Advantage**: Minimum average waiting time
+- **Disadvantage**: Starvation possible for long processes
 
-🤝 Contributing
+### Priority Scheduling
 
-Fork the repository
+- **Type**: Non-preemptive
+- **Logic**: Execute highest priority process first
+- **Advantage**: Important processes get preference
+- **Disadvantage**: Starvation possible for low priority processes
 
-Create a feature branch: git checkout -b feature/YourFeature
+### Round Robin (RR)
 
-Commit changes: git commit -m "Add YourFeature"
+- **Type**: Preemptive
+- **Logic**: Each process gets fixed time quantum
+- **Advantage**: Fair time sharing, no starvation
+- **Disadvantage**: High context switching overhead
 
-Push branch: git push origin feature/YourFeature
+## 🎨 UI Components
 
-Open a Pull Request
+### Main Interface
 
-🐛 Troubleshooting
+- **Algorithm Selector**: Dropdown to choose scheduling algorithm
+- **Process Input Form**: Interactive form for process data entry
+- **Process List**: Dynamic list of added processes
+- **Control Panel**: Simulation controls and statistics
 
-Backend
+### Visualization Components
 
-Port 8080 in use → Change in application.properties
+- **Enhanced Gantt Chart**: Animated timeline with process blocks
+- **Results Table**: Detailed metrics for each process
+- **Statistics Cards**: Summary of performance metrics
+- **Theme Toggle**: Dark/light mode switcher
 
-Java mismatch → Ensure Java 21+
+## 📊 Performance Metrics
 
-Maven build issues → Use ./mvnw
+### Calculated Metrics
 
-Frontend
+- **Completion Time**: `arrival_time + burst_time + waiting_time`
+- **Turnaround Time**: `completion_time - arrival_time`
+- **Waiting Time**: `turnaround_time - burst_time`
+- **Average Waiting Time**: `sum(waiting_times) / process_count`
+- **Average Turnaround Time**: `sum(turnaround_times) / process_count`
 
-Node version errors → Ensure Node.js 18+
+### Algorithm Comparison
 
-Dependency issues → Run npm install
+The application allows you to compare different algorithms by:
 
-CORS/API issues → Confirm backend is running on :8080
+- Running same process set with different algorithms
+- Observing different execution patterns
+- Comparing performance metrics
+- Understanding trade-offs between algorithms
 
-📞 Support
+## 🔧 Development
 
-GitHub Issues – Report bugs
+### Backend Development
 
-Email – samarthfirangi44@gmail.com
+```bash
+# Run in development mode
+./mvnw spring-boot:run
+
+# Run tests
+./mvnw test
+
+# Build for production
+./mvnw clean package
+```
+
+### Frontend Development
+
+```bash
+# Development server
+npm run dev
+
+# Type checking
+npm run type-check
+
+# Linting
+npm run lint
+
+# Production build
+npm run build
+npm start
+```
+
+### Environment Configuration
+
+- **Backend Port**: 8080 (configurable in `application.properties`)
+- **Frontend Port**: 3000 (configurable in `next.config.ts`)
+- **API Base URL**: `http://localhost:8080/api/scheduler`
+
+## 🤝 Contributing
+
+1. **Fork the Repository**
+2. **Create Feature Branch**: `git checkout -b feature/AmazingFeature`
+3. **Commit Changes**: `git commit -m 'Add some AmazingFeature'`
+4. **Push to Branch**: `git push origin feature/AmazingFeature`
+5. **Open Pull Request**
+
+### Development Guidelines
+
+- Follow existing code style and conventions
+- Write meaningful commit messages
+- Add tests for new features
+- Update documentation as needed
+- Ensure cross-platform compatibility
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+#### Backend Issues
+
+- **Port 8080 already in use**: Change port in `application.properties`
+- **Java version mismatch**: Ensure Java 21+ is installed
+- **Maven build fails**: Use Maven wrapper `./mvnw` instead of `mvn`
+
+#### Frontend Issues
+
+- **Node version**: Ensure Node.js 18+ is installed
+- **Dependencies**: Run `npm install` in the frontend directory
+- **Build failures**: Clear `.next` folder and rebuild
+
+#### Connection Issues
+
+- **API calls failing**: Verify backend is running on port 8080
+- **CORS errors**: Backend has CORS enabled for all origins
+- **Network issues**: Check firewall and network settings
+
+### Debug Mode
+
+- **Backend**: Add `--debug` flag when running Spring Boot
+- **Frontend**: Next.js provides detailed error messages in development mode
+
+
+## 📈 Future Enhancements
+
+- **Additional Algorithms**: SRTF, Multi-level Queue, Multi-level Feedback Queue
+- **Advanced Features**: Process aging, deadline scheduling
+- **Export Functionality**: Save results as PDF or CSV
+- **Real-time Comparison**: Side-by-side algorithm comparison
+- **Mobile App**: React Native implementation
+- **Performance Analytics**: Detailed performance analysis tools
+
+## 📞 Support
+
+For support and questions:
+
+- **GitHub Issues**: [Create an issue](https://github.com/samscam18/CpuSchedulingSimulator/issues)
+- **Email**: samarthfirangi44@gmail.com
+- **Documentation**: Check this README and inline code comments
+
+---
+
+**Happy Scheduling! 🎯**
